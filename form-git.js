@@ -182,7 +182,11 @@ const sender = function(){
              "twitter" : document.getElementById('twitter').value,
              "instagram" : document.getElementById('instagram').value,
              "others" : document.getElementById('otherSocials').value,
-         }
+         },
+
+         "medium": mediums,
+
+         "artCategory": checkCategories()
      }
      
      xhr.post(URL, item, (response) => {
@@ -198,6 +202,48 @@ const sender = function(){
 }
 
 // SIDE FUNCTIONS
+let mediums = []
+
+const checkCategories = function(){
+    let artCategory = []
+
+    const pChecks = document.querySelectorAll('#painting-checkboxes checkbox')
+    const dChecks = document.querySelectorAll('#drawing-checkboxes checkbox')
+    const sChecks = document.querySelectorAll('#threeD-checkboxes checkbox')
+
+    let painting = 0
+    let drawing = 0
+    let sculpture = 0
+
+    pChecks.forEach( e => {
+        if(e.checked){
+            painting = 1
+        }
+    })
+    dChecks.forEach( e => {
+        if(e.checked){
+            drawing = 1
+        }
+    })
+    sChecks.forEach( e => {
+        if(e.checked){
+            sculpture = 1
+        }
+    })
+
+    if(painting === 1){
+        artCategory.push('painting')
+    }
+    if(drawing === 1){
+        artCategory.push('drawing')
+    }
+    if(sculpture === 1){
+        artCategory.push('sculpture')
+    }
+
+    return artCategory
+}
+
 const checkMarketplaces = function(){
     let prevNft = 'none'
     if($("input[name='Previous NFTs']:checked").val() == 'yes' ){
@@ -213,11 +259,13 @@ const checkPaintings = function(){
     document.querySelectorAll('#painting-checkboxes checkbox').forEach( e => {
         if( e.checked ){
             paintings.push(e.name)
+            mediums.push(e.name)
         }
     })
 
     if(document.querySelector('#Painting-Other-Checkbox').checked){
         paintings.push(document.getElementById('Painting-Other').value)
+        mediums.push(document.getElementById('Painting-Other').value)
     }
 
     return paintings
@@ -229,11 +277,13 @@ const checkDrawings = function(){
     document.querySelectorAll('#drawing-checkboxes checkbox').forEach( e => {
         if( e.checked ){
             drawings.push(e.name)
+            mediums.push(e.name)
         }
     })
 
     if(document.querySelector('#Drawing-Other-Checkbox').checked){
         drawings.push(document.getElementById('Drawing-Other').value)
+        mediums.push(document.getElementById('Drawing-Other').value)
     }
 
     return drawings
@@ -255,11 +305,13 @@ const check3D = function(){
     document.querySelectorAll('#threeD-checkboxes checkbox').forEach( e => {
         if( e.checked ){
             threeD.push(e.name)
+            mediums.push(e.name)
         }
     })
 
     if(document.querySelector('#Sculpture-Other-Checkbox').checked){
         threeD.push(document.getElementById('Sculpture-Other').value)
+        mediums.push(document.getElementById('Sculpture-Other').value)
     }
 
     return threeD
