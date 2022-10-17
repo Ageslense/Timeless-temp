@@ -74,6 +74,14 @@ const duplicate = function(btn){
     btn.parentElement.insertBefore(div, btn)
     btn.parentElement.insertBefore(clone, btn)
 
+    if(clone.classList.contains('art-duplicateable')){
+        const art = clone.querySelectorAll('input')[0]
+
+        art.addEventListener('change', () => {
+            addArtWlink(art)
+        })
+    }
+
     i++
 }
 
