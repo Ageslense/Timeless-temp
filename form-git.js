@@ -85,7 +85,7 @@ btns.forEach( e => {
 
 const xhr = new easyHTTP()
 let images = []
-let arts;
+let currentFiles = 0
 
 document.getElementById('wf-form-Artist-Form').addEventListener('submit', e => {
     e.preventDefault()
@@ -104,7 +104,7 @@ function tester(){
     })
 }
 
-//Main Function
+//MAIN POST FUNCTION
 const sender = function(){
     
     let item = {
@@ -152,7 +152,7 @@ const sender = function(){
             }
             
             },
-        "image_url": arts,
+        "artDetails": getArts(),
         "museumExhibitions" : checkDuplicateable('museum-exhibitions'),
         "galleryExhibitions" : checkDuplicateable('gallery-exhibitions'),
         "artCompetitionAwards" : checkDuplicateable('art-awards'),
@@ -189,7 +189,7 @@ const sender = function(){
 
 }
 
-// Side Functions
+// SIDE FUNCTIONS
 const checkMarketplaces = function(){
     let prevNft = 'none'
     if($("input[name='Previous NFTs']:checked").val() == 'yes' ){
