@@ -201,7 +201,7 @@ const sender = function(){
 
 // SIDE FUNCTIONS
 const checkArtCategories = function(){
-    const categoryBlocks = document.querySelectorAll('.art-caategory-medium')
+    const categoryBlocks = document.querySelectorAll('.art-category-medium')
     let item = []
 
     categoryBlocks.forEach(block => {
