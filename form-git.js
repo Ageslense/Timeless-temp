@@ -184,9 +184,7 @@ const sender = function(){
              "others" : document.getElementById('otherSocials').value,
          },
 
-         "medium": mediums,
-
-         "artCategory": checkCategories()
+         "artCategoryMedium": checkArtCategories()
      }
      
      xhr.post(URL, item, (response) => {
@@ -202,46 +200,41 @@ const sender = function(){
 }
 
 // SIDE FUNCTIONS
-let mediums = []
+const checkArtCategories = function(){
+    const categoryBlocks = document.querySelectorAll('.art-caategory-medium')
+    let item = []
 
-const checkCategories = function(){
-    let artCategory = []
+    categoryBlocks.forEach(block => {
+        const title = block.querySelector('h4').textContent
 
-    const pChecks = document.querySelectorAll('#painting-checkboxes checkbox')
-    const dChecks = document.querySelectorAll('#drawing-checkboxes checkbox')
-    const sChecks = document.querySelectorAll('#threeD-checkboxes checkbox')
+        const wrappers = block.querySelectorAll('.col-wrapper')
 
-    let painting = 0
-    let drawing = 0
-    let sculpture = 0
+        let medium = []
+        let artCategory = []
 
-    pChecks.forEach( e => {
-        if(e.checked){
-            painting = 1
+        block.querySelectorAll('input').forEach( e => {
+            if( e.checked ){
+                medium.push(e.name)
+            }
+        })
+
+        wrappers.forEach( wrapper => {
+            if(wrapper.querySelector('input[checked]') != null){
+                artCategory.push(wrapper.previousElementSibling.textContent)
+            }
+        })
+
+        if(medium != []){
+
+            item.push({
+                "type": title,
+                "medium": medium,
+                "artCategory": artCategory
+            })
         }
     })
-    dChecks.forEach( e => {
-        if(e.checked){
-            drawing = 1
-        }
-    })
-    sChecks.forEach( e => {
-        if(e.checked){
-            sculpture = 1
-        }
-    })
 
-    if(painting === 1){
-        artCategory.push('painting')
-    }
-    if(drawing === 1){
-        artCategory.push('drawing')
-    }
-    if(sculpture === 1){
-        artCategory.push('sculpture')
-    }
-
-    return artCategory
+    return item
 }
 
 const checkMarketplaces = function(){
