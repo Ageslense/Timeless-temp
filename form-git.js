@@ -224,14 +224,11 @@ const checkArtCategories = function(){
             }
         })
 
-        if(medium != []){
-
-            item.push({
-                "type": title,
-                "medium": medium,
-                "artCategory": artCategory
-            })
-        }
+        item.push({
+            "type": title,
+            "medium": medium,
+            "artCategory": artCategory
+        })
     })
 
     return item
