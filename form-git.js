@@ -219,9 +219,15 @@ const checkArtCategories = function(){
         })
 
         wrappers.forEach( wrapper => {
-            if(wrapper.querySelector('input[checked]') != null){
-                artCategory.push(wrapper.previousElementSibling.textContent)
-            }
+            let cat = ''
+
+            wrapper.querySelectorAll('input').forEach( e => {
+                if(e.checked){
+                    cat = wrapper.previousElementSibling.textContent
+                }
+            })
+
+            artCategory.push(cat)
         })
 
         item.push({
