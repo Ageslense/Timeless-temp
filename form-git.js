@@ -31,8 +31,9 @@ function easyHTTP(){
 
        if(self.http.status === 201){
          console.log(data);
-       } else if(self.http.status === 409){
-         callback(this.response)
+       } else{
+
+           callback(self.http.status)
        }
     }
        
@@ -190,8 +191,16 @@ const sender = function(){
      xhr.post(URL, item, (response) => {
         
         console.log(response);
+
+        if(response == 409){
+            
             document.querySelector('.success-head').textContent = 'Your application was already submitted to the Timeless team and a representative will get in touch with you'
             document.querySelector('.success-para').textContent = 'If you need support please contact info@timelessart.io'
+        } else{
+            document.querySelector('.success-head').textContent = 'There has been an error with your submission'
+            document.querySelector('.success-para').textContent = 'Please reload the page and try again'
+            
+        }
 
     })
 
