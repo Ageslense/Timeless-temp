@@ -188,12 +188,10 @@ const sender = function(){
      }
      
      xhr.post(URL, item, (response) => {
-
-
+        
+        console.log(response);
             document.querySelector('.success-head').textContent = 'Your application was already submitted to the Timeless team and a representative will get in touch with you'
             document.querySelector('.success-para').textContent = 'If you need support please contact info@timelessart.io'
-        
-
 
     })
 
